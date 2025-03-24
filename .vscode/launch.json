@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/mathiaskneipp/Documents/UdeSA/Cuatrimestre_3/Paradigmas/homework2",
+      "program": "/Users/mathiaskneipp/Documents/UdeSA/Cuatrimestre_3/Paradigmas/homework2/build/Debug/outDebug"
+    }
+  ]
+}
