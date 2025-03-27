@@ -9,7 +9,7 @@ Estudiante::Estudiante(std::string nombre_completo_param, const int legajo_param
     notas = {};
 }
 
-Estudiante::Estudiante(std::string nombre_completo_param, const int legajo_param, std::vector<float> notas_param): legajo(legajo_param){
+Estudiante::Estudiante(std::string nombre_completo_param, const int legajo_param, std::vector<std::pair<std::string, int>> notas_param): legajo(legajo_param){
     nombre_completo = nombre_completo_param;
     notas = notas_param;
 }
@@ -23,7 +23,7 @@ const int Estudiante::get_legajo() {
     return legajo;
 }
 
-std::vector<float> Estudiante::get_notas() {
+std::vector<std::pair<std::string, int>> Estudiante::get_notas() {
     return notas;
 }
 
@@ -31,14 +31,14 @@ float Estudiante::get_promedio() {
     float suma = 0.0;
     if (notas.empty()) return suma;
     for (int i = 0; i < notas.size(); i++) {
-        suma += notas[i];
+        suma += notas[i].second;
     }
     return (suma/notas.size());
 }
 
 // Setter's
-void Estudiante::agregar_nota(const float nota_nueva) {
-    notas.push_back(nota_nueva);
+void Estudiante::agregar_nota(std::string curso, const float nota_nueva) {
+    notas.push_back({curso, nota_nueva});
 }
 
 // Operadores
