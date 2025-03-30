@@ -12,16 +12,16 @@ run_ej1:
 	./tiempo_exec
 
 run_ej2: 
-	$(CXX) $(CXXFLAGS) -o $(TARGET_TIEMPO) curso_main.cpp Estudiante.cpp Curso.cpp
-	./tiempo_exec
+	$(CXX) $(CXXFLAGS) -o $(TARGET_CURSO) curso_main.cpp Estudiante.cpp Curso.cpp
+	./curso_exec
 
 run_ej3:
-	$(CXX) $(CXXFLAGS) -o $(TARGET_TIEMPO) numero_main.cpp Numero.cpp
-	./tiempo_exec
+	$(CXX) $(CXXFLAGS) -o $(TARGET_NUMERO) numero_main.cpp Numero.cpp
+	./numero_exec
 
 run_ej4:
-	$(CXX) $(CXXFLAGS) -o $(TARGET_TIEMPO) banco_main.cpp Banco.cpp
-	./tiempo_exec
+	$(CXX) $(CXXFLAGS) -o $(TARGET_BANCO) banco_main.cpp Banco.cpp
+	./banco_exec
 
 clean:
-	rm -f tiempo_exec curso_exec
+	rm -f tiempo_exec curso_exec numero_exec banco_exec
