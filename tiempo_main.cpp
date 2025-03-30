@@ -173,4 +173,5 @@ int main() {
         std::cout << "¿Devuelta? (1: sí, 0: no): ";
         std::cin >> seguir;
     }
+    return 0;
 }

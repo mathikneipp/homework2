@@ -4,33 +4,33 @@
 #include <vector>
 
 // Constructor
-Estudiante::Estudiante(std::string nombre_completo_param, const int legajo_param): legajo(legajo_param){
-    nombre_completo = nombre_completo_param;
+Estudiante::Estudiante(std::string _nombre_completo, const int _legajo) : legajo(_legajo){
+    nombre_completo = _nombre_completo;
     notas = {};
 }
 
-Estudiante::Estudiante(std::string nombre_completo_param, const int legajo_param, std::vector<std::pair<std::string, int>> notas_param): legajo(legajo_param){
-    nombre_completo = nombre_completo_param;
-    notas = notas_param;
+Estudiante::Estudiante(std::string _nombre_completo, const int _legajo, std::vector<std::pair<std::string, float>> _notas) : legajo(_legajo){
+    nombre_completo = _nombre_completo;
+    notas = _notas;
 }
 
 // Getter's
-std::string Estudiante::get_nombre() {
+std::string Estudiante::get_nombre() const {
     return nombre_completo;
 }
 
-const int Estudiante::get_legajo() {
+int Estudiante::get_legajo() const {
     return legajo;
 }
 
-std::vector<std::pair<std::string, int>> Estudiante::get_notas() {
+std::vector<std::pair<std::string, float>> Estudiante::get_notas() const {
     return notas;
 }
 
-float Estudiante::get_promedio() {
+float Estudiante::get_promedio() const {
     float suma = 0.0;
     if (notas.empty()) return suma;
-    for (int i = 0; i < notas.size(); i++) {
+    for (size_t i = 0; i < notas.size(); i++) {
         suma += notas[i].second;
     }
     return (suma/notas.size());
@@ -43,11 +43,12 @@ void Estudiante::agregar_nota(std::string curso, const float nota_nueva) {
 
 // Operadores
 // Compara dos nombres alfabeticamente.
-bool Estudiante::operator<(Estudiante otro) {
-    return get_nombre() < otro.get_nombre();
+bool Estudiante::operator<(const Estudiante& otro) const {
+    return nombre_completo < otro.nombre_completo;
 }
+
 // Imprime el nombre de un estudiante con formato "Nombre: <Nombre>"
-std::ostream& operator<<(std::ostream& os, Estudiante& e) {
+std::ostream& operator<<(std::ostream& os, const Estudiante& e) {
     os << "Nombre: " << e.get_nombre() << std::endl;
     return os;
 }

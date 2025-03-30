@@ -1,19 +1,29 @@
+#pragma once
+
 #include <iostream>
 
 class Banco {
-    private:
+    protected:
         double balance;
         std::string titular;
+
+    private:
+        // Deposita dinero en la cuenta
+        void depositar(double dinero_depositar);
+
     public:
-    void depositar(double dinero_depositar);
-    
-
+        Banco(std::string _titular);
+        // Retira dinero de la cuenta
+        virtual bool retirar(double dinero_retirar) = 0;
+        // Muestra la informacion segun el tipo de cuenta (Caja de ahorro / Cuenta corriente)
+        virtual void mostrar_info() = 0;
 };
 
-class Caja_de_ahorro {
-
+class Caja_de_ahorro: public Banco {
+    private:
+        int veces_mostradas;
 };
 
-class Cuenta_corriente {
-
+class Cuenta_corriente: public Banco {
+    friend Caja_de_ahorro;
 };

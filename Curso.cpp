@@ -7,37 +7,34 @@
 
 
 // Constructor
-Curso::Curso() {
+Curso::Curso(std::string _nombre) {
+    nombre = _nombre;
     lista_estudiantes = {};
 }
 
-Curso::Curso(std::vector<std::shared_ptr<Estudiante>> lista_estudiantes_param) {
-    lista_estudiantes = lista_estudiantes_param;
+Curso::Curso(std::string _nombre, std::vector<std::unique_ptr<Estudiante>> _lista_estudiantes) {
+    nombre = _nombre;
+    lista_estudiantes = _lista_estudiantes;
 }
 
-/* Deep copy
- * Recorro la lista del otro curso y voy creando nuevos smart pointers de los estudiantes e inscribiendo en el nuevo curso.
+/* Shallow copy
+ * Hago shallow copy, porque los cursos no poseen a los estudiantes.
  */ 
-Curso::Curso(const Curso& otro) {
-    for (int i = 0; i < otro.lista_estudiantes.size(); i++) {
-        // Crear un nuevo Estudiante con un smart pointer
-        inscribir_estudiante(std::make_shared<Estudiante>(*otro.lista_estudiantes[i]));
-    }
-}
+Curso::Curso(const Curso& otro) : lista_estudiantes(otro.lista_estudiantes), nombre(otro.nombre) {}
 
 // Setter's
 // Inscribe un nuevo estudiante al curso.
-void Curso::inscribir_estudiante(const std::shared_ptr<Estudiante>& estudiante_nuevo) {
+void Curso::inscribir_estudiante(const std::unique_ptr<Estudiante>& estudiante_nuevo) {
     if (is_inscripto(estudiante_nuevo->get_legajo())) throw std::runtime_error("El estudiante ya esta inscripto.");
     if (is_lleno()) throw std::runtime_error("El curso se encuentra lleno.");
     lista_estudiantes.push_back(estudiante_nuevo);
 }
 
 // Desinscribe un estudiante del curso.
-void Curso::desinscribir_estudiante(const std::shared_ptr<Estudiante>& estudiante_a_sacar) {
+void Curso::desinscribir_estudiante(const std::unique_ptr<Estudiante>& estudiante_a_sacar) {
     if (is_vacio()) throw std::runtime_error("El curso se encuentra vacio.");
     if (is_inscripto(estudiante_a_sacar->get_legajo()) == false) throw std::runtime_error("El estudiante no esta inscripto.");
-    for (int i = 0; i < lista_estudiantes.size(); i++) {
+    for (size_t i = 0; i < lista_estudiantes.size(); i++) {
         if (lista_estudiantes[i]->get_legajo() == estudiante_a_sacar->get_legajo()) {
             lista_estudiantes.erase(lista_estudiantes.begin() + i);
         }
@@ -45,9 +42,14 @@ void Curso::desinscribir_estudiante(const std::shared_ptr<Estudiante>& estudiant
 }
 
 // Getter's
+
+std::string Curso::get_nombre() {
+    return nombre;
+}
+
 // Verifica por legajo si existe tal estudiante en el curso.
 bool Curso::is_inscripto(const int legajo) {
-    for (int i = 0; i < lista_estudiantes.size(); i++) {
+    for (size_t i = 0; i < lista_estudiantes.size(); i++) {
         if (lista_estudiantes[i]->get_legajo() == legajo) return true; // En caso de que encuentre en el curso el legajo que buscamos.
     }
     return false; // Caso contrario
@@ -64,8 +66,11 @@ bool Curso::is_vacio() {
 
 // Imprime la lista de estudiantes en orden alfabético.
 void Curso::print_lista_estudiantes() {
-    std::sort(lista_estudiantes.begin(), lista_estudiantes.end());
-    for (int i = 0; i < lista_estudiantes.size(); i++) {
-        std::cout << lista_estudiantes[i];
+    std::sort(lista_estudiantes.begin(), lista_estudiantes.end(), 
+        [](const std::unique_ptr<Estudiante>& a, const std::unique_ptr<Estudiante>& b) { // Para usar los objetos y no los punteros.
+            return *a < *b; // Uso el comparador <
+        }); 
+    for (const auto& estudiante : lista_estudiantes) {
+        std::cout << *estudiante;
     }
 }
