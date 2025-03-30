@@ -24,4 +24,4 @@ run_ej4:
 	./banco_exec
 
 clean:
-	rm -f tiempo_exec curso_exec numero_exec banco_exec
+	rm -rf *.o *.dSYM banco_exec curso_exec numero_exec tiempo_exec output
