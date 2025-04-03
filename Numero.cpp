@@ -15,7 +15,7 @@ Entero::Entero(int _valor)
 std::unique_ptr<Numero> Entero::operator+(const Numero& otro) const {
     const Entero* otro_entero = dynamic_cast<const Entero*>(&otro); // Casteo de Numero a Entero
     if (otro_entero == nullptr) { // Caso de que no sea Entero
-        throw std::invalid_argument("La suma no es de enteros.");
+        throw std::invalid_argument("La suma no es de enteros."); // ????? CONSULTAR ESTO ?????
     }
     return std::make_unique<Entero>(valor + otro_entero->valor); // Crea el puntero y el nuevo Entero y lo devuelve.
 }

@@ -31,7 +31,7 @@ float Estudiante::get_promedio() const {
     float suma = 0.0;
     if (notas.empty()) return suma;
     for (size_t i = 0; i < notas.size(); i++) {
-        suma += notas[i].second;
+        suma += notas[i].second; 
     }
     return (suma/notas.size());
 }

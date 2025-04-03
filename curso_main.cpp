@@ -17,17 +17,17 @@ int elegir_cursos(std::vector<std::unique_ptr<Curso>> cursos) {
     }
     int pos = 1;
     std::cout << "\nCursos: ";
-    for (const auto& i : cursos) { // Imprimo todos los cursos que hay
+    for (const auto& i : cursos) { // Imprimo todos los cursos que hay.
         std::cout << "\n" << pos << ". Clase: " << i->get_nombre();
         pos++;
     }
     std::cout << "\nEleccion: ";
     std::cin >> pos;
-    if (std::cin.fail()) { // Caso de ingresar cualquier otra cosa
+    if (std::cin.fail()) { // Caso de ingresar cualquier otra cosa.
         throw std::runtime_error("Entrada inválida.");
     }
 
-    return pos - 1; // Devuelvo la posicion del unique pointer
+    return pos - 1; // Devuelvo la posicion del unique pointer.
 }
 
 int elegir_estudiante(std::vector<std::unique_ptr<Estudiante>> estudiantes) {
@@ -38,7 +38,7 @@ int elegir_estudiante(std::vector<std::unique_ptr<Estudiante>> estudiantes) {
     
     int pos = 1;
     std::cout << "\nEstudiantes:";
-    for (const auto& i : estudiantes) { // Imprimo todos los estudiantes que hay
+    for (const auto& i : estudiantes) { // Imprimo todos los estudiantes que hay.
         std::cout << "\n" << pos << ". Nombre: " << i->get_nombre() << ". Legajo: " << i->get_legajo();
         pos++;
     }
@@ -46,10 +46,10 @@ int elegir_estudiante(std::vector<std::unique_ptr<Estudiante>> estudiantes) {
     std::cout << "\nEleccion: ";
     std::cin >> pos;
 
-    if (std::cin.fail()) { // Caso de ingresar cualquier otra cosa
+    if (std::cin.fail()) { // Caso de ingresar cualquier otra cosa.
         throw std::runtime_error("Entrada inválida.");
     }
-    return pos-1; // Devuelvo la posicion del unique pointer
+    return pos-1; // Devuelvo la posicion del unique pointer.
 }
 
 int main() {
@@ -80,7 +80,7 @@ int main() {
                 std::getline(std::cin, _nombre);
                 std::cout << "\nLegajo: ";
                 std::cin >> _legajo;
-                if (std::cin.fail()) {
+                if (std::cin.fail()) { // Caso de que se ingrese otra cosa a la pedida.
                     throw std::runtime_error("Entrada inválida");
                 }
 
@@ -97,7 +97,7 @@ int main() {
                 std::cout << "\nNombre: ";
                 std::cin >> std::ws; // Elimina los whitespaces del buffer
                 std::getline(std::cin, _nombre);
-                if (std::cin.fail()) {
+                if (std::cin.fail()) { // Caso de que se ingrese otra cosa a la pedida.
                     throw std::runtime_error("Entrada inválida");
                 }
 
@@ -152,7 +152,7 @@ int main() {
 
                 std::cout << "\nLegajo: ";
                 std::cin >> _legajo;
-                if (std::cin.fail()) {
+                if (std::cin.fail()) { // Caso de que se ingrese otra cosa a la pedida.
                     throw std::runtime_error("Entrada inválida");
                 }
 

@@ -18,7 +18,8 @@ Curso::Curso(std::string _nombre, std::vector<std::unique_ptr<Estudiante>> _list
 }
 
 /* Shallow copy
- * Hago shallow copy, porque los cursos no poseen a los estudiantes.
+ * Hago shallow copy, porque los cursos no poseen a los estudiantes y estos son unique pointers, 
+ * de esta forma evito que se dupliquen los estudiantes.
  */ 
 Curso::Curso(const Curso& otro) : lista_estudiantes(otro.lista_estudiantes), nombre(otro.nombre) {}
 
@@ -32,11 +33,12 @@ void Curso::inscribir_estudiante(const std::unique_ptr<Estudiante>& estudiante_n
 
 // Desinscribe un estudiante del curso.
 void Curso::desinscribir_estudiante(const std::unique_ptr<Estudiante>& estudiante_a_sacar) {
-    if (is_vacio()) throw std::runtime_error("El curso se encuentra vacio.");
-    if (is_inscripto(estudiante_a_sacar->get_legajo()) == false) throw std::runtime_error("El estudiante no esta inscripto.");
-    for (size_t i = 0; i < lista_estudiantes.size(); i++) {
-        if (lista_estudiantes[i]->get_legajo() == estudiante_a_sacar->get_legajo()) {
-            lista_estudiantes.erase(lista_estudiantes.begin() + i);
+    if (is_vacio()) throw std::runtime_error("El curso se encuentra vacio."); // Pregunto si el curso esta vacio.
+    if (is_inscripto(estudiante_a_sacar->get_legajo()) == false) throw std::runtime_error("El estudiante no esta inscripto."); // Si el estudiante no esta inscripto, tira runtime error.
+    for (size_t i = 0; i < lista_estudiantes.size(); i++) { // Recorro el vector hasta encontrar la pos del estudiante a desinscribir.
+        if (lista_estudiantes[i]->get_legajo() == estudiante_a_sacar->get_legajo()) { // Si coinciden los legajos.
+            lista_estudiantes.erase(lista_estudiantes.begin() + i); // Lo borro de la lista, y salgo del for.
+            break;
         }
     }
 }

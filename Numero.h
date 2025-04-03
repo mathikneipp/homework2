@@ -51,5 +51,3 @@ class Complejo: public Numero {
         std::unique_ptr<Numero> operator*(const Numero& otro) const override;
         std::string to_string() const override;
 };
-
-
