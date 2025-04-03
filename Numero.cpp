@@ -4,9 +4,6 @@
 #include "Numero.h"
 #include <memory>
 
-// Constructor Numero
-Numero::Numero() = default;
-
 // Enteros
 
 Entero::Entero(int _valor) 

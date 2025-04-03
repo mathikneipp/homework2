@@ -6,9 +6,6 @@
 
 class Numero {
     public:
-        //Constructor
-        Numero();
-
         // Suma de 2 numeros
         virtual std::unique_ptr<Numero> operator+(const Numero& otro) const = 0;
         // Resta de 2 numeros
