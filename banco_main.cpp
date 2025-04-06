@@ -37,6 +37,10 @@ int main() {
                     << "7. Salir.\n"
                     << "Seleccionar opcion: ";
             std::cin >> opcion;
+            if (std::cin.fail()) { // Caso de ingresar cualquier otra cosa que no sea un 'int'
+                std::cout << "Entrada inválida.";
+                return 1;
+            }
         }
         switch (opcion) {
             case 1:
